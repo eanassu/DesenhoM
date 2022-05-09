@@ -91,21 +91,20 @@ public class DesenhoView extends View {
         point.y = (int) y;
     }
     private void touchMoved(MotionEvent event) {
-        int i = 0; {
-            int pointerID = event.getPointerId(i);
-            int pointerIndex = event.findPointerIndex(pointerID);
-            if (pathMap.containsKey(pointerID)) {
-                float newX = event.getX(pointerIndex);
-                float newY = event.getY(pointerIndex);
-                Path path = pathMap.get(pointerID);
-                Point point = previousPointMap.get(pointerID);
-                float deltaX = Math.abs(newX - point.x);
-                float deltaY = Math.abs(newY - point.y);
-                if (deltaX >= TOUCH_TOLERANCE || deltaY >= TOUCH_TOLERANCE) {
-                    path.quadTo(point.x, point.y, (newX + point.x) / 2,(newY + point.y) / 2);
-                    point.x = (int) newX;
-                    point.y = (int) newY;
-                }
+        int i = 0;
+        int pointerID = event.getPointerId(i);
+        int pointerIndex = event.findPointerIndex(pointerID);
+        if (pathMap.containsKey(pointerID)) {
+            float newX = event.getX(pointerIndex);
+            float newY = event.getY(pointerIndex);
+            Path path = pathMap.get(pointerID);
+            Point point = previousPointMap.get(pointerID);
+            float deltaX = Math.abs(newX - point.x);
+            float deltaY = Math.abs(newY - point.y);
+            if (deltaX >= TOUCH_TOLERANCE || deltaY >= TOUCH_TOLERANCE) {
+                path.quadTo(point.x, point.y, (newX + point.x) / 2,(newY + point.y) / 2);
+                point.x = (int) newX;
+                point.y = (int) newY;
             }
         }
     }
